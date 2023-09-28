@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @AllArgsConstructor
-public class BaseService<E extends BaseEntity, QDto extends BaseDto, SDto extends BaseDto, ID extends Number>
+public abstract class BaseService<E extends BaseEntity, QDto extends BaseDto, SDto extends BaseDto, ID extends Number>
         implements IBaseService<QDto, SDto, ID> {
 
     public IBaseRepository<E, ID> baseRepository;
@@ -18,7 +18,9 @@ public class BaseService<E extends BaseEntity, QDto extends BaseDto, SDto extend
     @Override
     public SDto findById(ID id) throws BaseException {
 
-        E entity = baseRepository.findById(id).orElseThrow(BaseException::new);
+        E entity = baseRepository
+                .findById(id)
+                .orElseThrow(() -> new BaseException("Requested Entity with id " + id + " not exists!"));
         if (entity.getDeleted()) throw new BaseException("Requested Entity Was Already Deleted!");
         return baseMapper.entityToRes(entity);
     }
@@ -69,7 +71,9 @@ public class BaseService<E extends BaseEntity, QDto extends BaseDto, SDto extend
     @Override
     public void deleteSafelyById(ID id) throws BaseException {
 
-        E entity = baseRepository.findById(id).orElseThrow(BaseException::new);
+        E entity = baseRepository
+                .findById(id)
+                .orElseThrow(() -> new BaseException("Requested Entity with id " + id + " not exists!"));
         if (entity.getDeleted()) throw new BaseException("Requested Entity Was Already Deleted!");
         //Set safe delete
         entity.setDeleted(true);

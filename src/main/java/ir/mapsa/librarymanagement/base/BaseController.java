@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @AllArgsConstructor
-public class BaseController<QDto extends BaseDto, SDto extends BaseDto, ID extends Number>
+public abstract class BaseController<QDto extends BaseDto, SDto extends BaseDto, ID extends Number>
         implements IBaseController<QDto, SDto, ID> {
 
     public final IBaseService<QDto, SDto, ID> baseService;

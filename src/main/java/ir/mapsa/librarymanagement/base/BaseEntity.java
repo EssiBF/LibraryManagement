@@ -18,7 +18,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @EnableJpaAuditing
 @MappedSuperclass
-public class BaseEntity<ID extends Number> {
+public abstract class BaseEntity<ID extends Number> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

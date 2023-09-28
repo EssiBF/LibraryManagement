@@ -27,7 +27,7 @@ public class MemberService extends BaseService<Member, MemberQDto, MemberSDto, L
 
     public MemberSDto findByNationalCode(String nationalCode) throws BaseException {
         Member targetMember = memberRepository.findMemberByNationalCode(nationalCode);
-        if (targetMember == null) throw new BaseException("Member National Code Not Found!");
+        if (targetMember == null) throw new BaseException("Member national code is not found");
         return memberMapper.entityToRes(targetMember);
     }
 

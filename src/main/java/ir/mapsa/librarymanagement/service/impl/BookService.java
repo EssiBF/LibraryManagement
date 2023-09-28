@@ -47,7 +47,9 @@ public class BookService extends BaseService<Book, BookQDto, BookSDto, Long> imp
     //2
     public LibrarySDto getBookLibrary(Long id) throws BaseException {
 
-        Book bookEntity = bookRepository.findById(id).orElseThrow(BaseException::new);
+        Book bookEntity = bookRepository
+                .findById(id)
+                .orElseThrow(() -> new BaseException("Book with id " + id + " not exists!"));
 
         Library bookLibrary = bookEntity.getLibrary();
         return libraryMapper.entityToRes(bookLibrary);

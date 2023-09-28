@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class BaseDto<ID> implements IBaseDto {
+public abstract class BaseDto<ID> implements IBaseDto {
 
     protected ID id;
     protected LocalDateTime createdDate;

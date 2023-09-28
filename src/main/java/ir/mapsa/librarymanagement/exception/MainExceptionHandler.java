@@ -6,13 +6,17 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import java.time.LocalDateTime;
+
 @ControllerAdvice
-public class BaseExceptionHandler {
+public class MainExceptionHandler {
 
-    @ExceptionHandler({BaseException.class})
+    @ExceptionHandler(value = BaseException.class)
     public ResponseEntity<ErrorMessage> baseExceptionHandler(BaseException baseException) {
-        return new ResponseEntity<>
-                (new ErrorMessage(404, baseException.getMessage()), HttpStatus.NOT_FOUND);
 
+        ErrorMessage errorMessage = new ErrorMessage
+                (HttpStatus.NOT_FOUND.value(), baseException.getMessage(), LocalDateTime.now());
+
+        return new ResponseEntity<>(errorMessage, HttpStatus.NOT_FOUND);
     }
 }

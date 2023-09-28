@@ -28,14 +28,14 @@ implements ILibrarianService {
     public LibrarianSDto findByNationalCode(String nationalCode) throws BaseException {
 
         Librarian targetLibrarian = librarianRepository.findLibrarianByNationalCode(nationalCode);
-        if (targetLibrarian == null) throw new BaseException("Librarian National Code Not Found");
+        if (targetLibrarian == null) throw new BaseException("Librarian national code is not found");
         return librarianMapper.entityToRes(targetLibrarian);
     }
 
     public LibrarianSDto findByPersonnelCode(String personnelCode) throws BaseException {
 
         Librarian targetLibrarian = librarianRepository.findLibrarianByPersonnelCode(personnelCode);
-        if (targetLibrarian == null) throw new BaseException("Librarian Personnel Code Not Found");
+        if (targetLibrarian == null) throw new BaseException("Librarian personnel code is not found");
         return librarianMapper.entityToRes(targetLibrarian);
     }
 

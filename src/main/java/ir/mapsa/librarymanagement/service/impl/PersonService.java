@@ -27,7 +27,7 @@ implements IPersonService {
 
     public PersonSDto findByNationalCode(String nationalCode) throws BaseException {
         Person targetperson = personRepository.findPersonByNationalCode(nationalCode.trim());
-        if (targetperson == null) throw new BaseException("National Code Not Found!");
+        if (targetperson == null) throw new BaseException("National code is not found");
         return personMapper.entityToRes(targetperson);
     }
 }

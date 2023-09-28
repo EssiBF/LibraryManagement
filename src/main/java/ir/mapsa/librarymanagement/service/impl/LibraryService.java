@@ -46,7 +46,9 @@ public class LibraryService extends BaseService<Library, LibraryQDto, LibrarySDt
     //2
     public List<BookSDto> getLibraryAllBooks(Long id) throws BaseException {
 
-        Library targetLibrary = libraryRepository.findById(id).orElseThrow(BaseException::new);
+        Library targetLibrary = libraryRepository
+                .findById(id)
+                .orElseThrow(() -> new BaseException("Library with id " + id + " not exists!"));
         List<Book> bookList = targetLibrary.getBookList();
         List<BookSDto> bookSDtoList = new ArrayList<>();
         bookList.stream()
