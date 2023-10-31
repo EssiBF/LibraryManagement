@@ -3,7 +3,6 @@ package ir.mapsa.librarymanagement.base;
 import ir.mapsa.librarymanagement.util.EntityCopyUtils;
 import lombok.AllArgsConstructor;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,8 +41,6 @@ public abstract class BaseService<E extends BaseEntity, QDto extends BaseDto, SD
         //Convert Dto to Entity
         E entity = baseMapper.reqToEntity(qDto);
         //Completion
-        entity.createdDate = LocalDateTime.now();
-        entity.lastModifiedDate = null;
         entity.setDeleted(false);
         //Saving
         E returnedEntity = baseRepository.save(entity);
@@ -60,8 +57,6 @@ public abstract class BaseService<E extends BaseEntity, QDto extends BaseDto, SD
         if (entity.getDeleted()) throw new BaseException("Requested Entity Was Already Deleted!");
         //Update Non-Null Fields From Dto
         EntityCopyUtils.copyNonNullProperties(entity, currentEntity);
-        //Completion
-        currentEntity.lastModifiedDate = LocalDateTime.now();
         //Saving
         E returnedEntity = baseRepository.save(currentEntity);
         //Convert Entity to Dto & Return
@@ -77,7 +72,6 @@ public abstract class BaseService<E extends BaseEntity, QDto extends BaseDto, SD
         if (entity.getDeleted()) throw new BaseException("Requested Entity Was Already Deleted!");
         //Set safe delete
         entity.setDeleted(true);
-        entity.setLastModifiedDate(LocalDateTime.now());
         //Saving
         baseRepository.save(entity);
     }
