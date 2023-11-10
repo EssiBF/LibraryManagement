@@ -1,9 +1,7 @@
 package ir.mapsa.librarymanagement.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import ir.mapsa.librarymanagement.base.BaseEntity;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,7 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "member")
-public class Member extends Person {
+public class Member extends BaseEntity<Long> {
 
     @Column(nullable = false)
     private String memberNo;
@@ -30,4 +28,8 @@ public class Member extends Person {
 
     @OneToMany(mappedBy = "member")
     private List<Borrow> borrowList = new ArrayList<>();
+
+    @OneToOne(optional = false)
+    @JoinColumn(name = "person_id", referencedColumnName = "id")
+    private Person person;
 }

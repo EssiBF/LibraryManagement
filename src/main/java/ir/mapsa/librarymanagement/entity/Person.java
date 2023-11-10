@@ -11,13 +11,16 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "person")
-@Inheritance(strategy = InheritanceType.JOINED)
+////Inheritance strategy
+//@Inheritance(strategy = InheritanceType.JOINED)
 public class Person extends BaseEntity<Long>{
 
-    @Column/*(nullable = false)*/
+    @Column(nullable = false)
     private String firstName;
-    @Column/*(nullable = false)*/
+
+    @Column(nullable = false)
     private String lastName;
-    @Column/*(unique = true, nullable = false)*/
+
+    @Column(unique = true, nullable = false)
     private String nationalCode;
 }
